@@ -1,13 +1,13 @@
-/* Signal Lab — SOQT Labs */
+/* Blueprint Studio — SOQT Labs */
 
 :root {
-  --canvas: #f4f6f8;
-  --surface: #ffffff;
-  --ink: #0b1220;
-  --muted: #5b6b7c;
-  --accent: #0f766e;
-  --accent-soft: #ccfbf1;
-  --line: #d7dee7;
+  --canvas: #e8eef4;
+  --surface: #f7fafc;
+  --ink: #102a43;
+  --muted: #486581;
+  --accent: #c81e1e;
+  --accent-soft: #d4e4f5;
+  --line: #9fb3c8;
 
   --font-display: "Space Grotesk", sans-serif;
   --font-body: "IBM Plex Sans", sans-serif;
@@ -172,43 +172,45 @@ ul {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background:
+  background-color: var(--canvas);
+  background-image:
     linear-gradient(
       165deg,
-      color-mix(in srgb, var(--accent-soft) 55%, var(--canvas)) 0%,
-      var(--canvas) 42%,
-      color-mix(in srgb, var(--line) 35%, var(--canvas)) 100%
+      color-mix(in srgb, var(--accent-soft) 70%, transparent) 0%,
+      color-mix(in srgb, var(--canvas) 75%, transparent) 45%,
+      color-mix(in srgb, var(--canvas) 88%, transparent) 100%
     ),
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 47px,
-      color-mix(in srgb, var(--line) 70%, transparent) 47px,
-      color-mix(in srgb, var(--line) 70%, transparent) 48px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 47px,
-      color-mix(in srgb, var(--line) 70%, transparent) 47px,
-      color-mix(in srgb, var(--line) 70%, transparent) 48px
-    );
+    url("assets/pattern-grid.svg"), url("assets/pattern-dots.svg");
   background-size:
     auto,
-    48px 48px,
-    48px 48px;
-  opacity: 1;
+    96px 96px,
+    20px 20px;
+  background-position: center, center, center;
+  background-repeat: no-repeat, repeat, repeat;
 }
 
 .hero-atmosphere::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    ellipse 80% 60% at 70% 20%,
-    color-mix(in srgb, var(--accent-soft) 40%, transparent),
-    transparent 60%
-  );
+  background:
+    radial-gradient(
+      ellipse 70% 55% at 72% 28%,
+      color-mix(in srgb, var(--accent-soft) 55%, transparent),
+      transparent 62%
+    ),
+    linear-gradient(to top, var(--canvas) 0%, transparent 28%);
+  pointer-events: none;
+}
+
+.hero-mark {
+  position: absolute;
+  top: 8%;
+  right: -6%;
+  width: min(72vw, 34rem);
+  aspect-ratio: 1;
+  background: url("assets/hero-mark.svg") center / contain no-repeat;
+  opacity: 0.9;
   pointer-events: none;
 }
 
@@ -268,12 +270,45 @@ ul {
 /* Sections */
 
 .section {
+  position: relative;
   padding: var(--space-2xl) 0;
+  isolation: isolate;
+}
+
+.section-pattern {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: url("assets/pattern-dots.svg");
+  background-size: 18px 18px;
+  opacity: 0.35;
+  pointer-events: none;
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    #000 18%,
+    #000 82%,
+    transparent
+  );
+}
+
+.section-pattern--hatch {
+  background-image: url("assets/pattern-hatch.svg");
+  background-size: 12px 12px;
+  opacity: 0.4;
 }
 
 .products {
   background: var(--surface);
   border-block: 1px solid var(--line);
+}
+
+.approach {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-soft) 28%, var(--canvas)),
+    var(--canvas)
+  );
 }
 
 .section-label {
@@ -352,6 +387,13 @@ ul {
     min-height: calc(92vh - var(--header-h));
     padding-top: var(--space-xl);
     align-items: flex-end;
+  }
+
+  .hero-mark {
+    top: 4%;
+    right: -28%;
+    width: min(95vw, 26rem);
+    opacity: 0.55;
   }
 
   .section {
